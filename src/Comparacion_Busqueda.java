@@ -1,10 +1,27 @@
+import java.util.Arrays;
 import java.util.Random;
 
 public class Comparacion_Busqueda {
     public static void main(String[] args) {
         int n = 1000000;// tamanio del arreglo
         int[] datos = generar_Arreglo(n);
-        int objetivo = datos[new Random().nextInt(n)];
+        int objetivo = datos[new Random().nextInt(n)];//elige un elemento aleatorio
+
+        //Medicion de busqueda lineal
+        long inicio = System.nanoTime();
+        int resultado_Lineal = busqueda_Lineal(datos, objetivo);
+        long fin = System.nanoTime();
+        System.out.println("Busqueda Lienal: el indice encontrado es" + resultado_Lineal + ", Tiempo: " + (fin - inicio) + " ns");
+
+        //Ordenamos el arreglo para hacer la busqueda binaria
+        Arrays.sort(datos);
+
+        //medicion de busqueda binaria
+        inicio = System.nanoTime();
+        int resultado_Binario = busqueda_Binaria(datos, objetivo);
+        fin = System.nanoTime();
+        System.out.println("Busqueda Binaria: el indice encontrado es " + resultado_Binario + ", Tiempo: " + (fin - inicio) + " ns");
+        
     }
 
     //Metodo el cual genera un arreglo con valores aleatorios
